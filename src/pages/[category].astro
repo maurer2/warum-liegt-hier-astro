@@ -1,8 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import type { InferGetStaticParamsType, GetStaticPaths } from "astro";
 
 // runs during compilation only
-export async function getStaticPaths() {
+export const getStaticPaths = (async () => {
   const response = await fetch("https://swapi.dev/api/");
   const data = (await response.json()) as Record<string, string>;
 
@@ -11,9 +12,11 @@ export async function getStaticPaths() {
   }));
 
   return navCategories;
-}
+}) satisfies GetStaticPaths;
 
-const { category } = Astro.params;
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+
+const { category } = Astro.params as Params;
 ---
 
 <Layout title="Welcome to Astro.">
