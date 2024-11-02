@@ -26,9 +26,10 @@ console.log(navElements);
   </head>
   <body>
     <nav class="nav">
+      <a href="/">Home</a>
       {navElements.map(([label, url]) => <a href={label}>{label}</a>)}
-      <slot />
     </nav>
+    <slot />
   </body>
   <style is:global>
     :root {
@@ -46,10 +47,26 @@ console.log(navElements);
       font-family: system-ui, sans-serif;
       background: #13151a;
     }
+    main {
+      margin: auto;
+      padding: 1rem;
+      width: 800px;
+      max-width: calc(100% - 2rem);
+      color: white;
+      font-size: 20px;
+      line-height: 1.6;
+    }
     .nav {
       display: flex;
       gap: 1rem;
-      color: whitesmoke;
+      background: whitesmoke;
+    }
+    h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      line-height: 1;
+      text-align: center;
+      margin-bottom: 1em;
     }
   </style>
 </html>
