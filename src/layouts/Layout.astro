@@ -1,4 +1,6 @@
 ---
+import { getCollection } from "astro:content";
+
 interface Props {
   title: string;
 }
@@ -6,12 +8,10 @@ interface Props {
 // server side only
 const { title } = Astro.props;
 
-// runs during compilation only
-const response = await fetch("https://swapi.dev/api/");
-const data = (await response.json()) as Record<string, string>;
-
-const navElements = Object.entries(data);
-console.log(navElements);
+const navCategoriesCollection = await getCollection("navCategories");
+const navElements = navCategoriesCollection.map(
+  (navCategory) => navCategory.data
+);
 ---
 
 <!doctype html>
@@ -27,7 +27,7 @@ console.log(navElements);
   <body>
     <nav class="nav">
       <a href="/">Home</a>
-      {navElements.map(([label, url]) => <a href={`/${label}`}>{label}</a>)}
+      {navElements.map(({ id }) => <a href={`/${id}`}>{id}</a>)}
     </nav>
     <slot />
   </body>
