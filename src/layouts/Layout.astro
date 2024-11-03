@@ -27,7 +27,7 @@ console.log(navElements);
   <body>
     <nav class="nav">
       <a href="/">Home</a>
-      {navElements.map(([label, url]) => <a href={label}>{label}</a>)}
+      {navElements.map(([label, url]) => <a href={`/${label}`}>{label}</a>)}
     </nav>
     <slot />
   </body>
@@ -60,6 +60,9 @@ console.log(navElements);
       display: flex;
       gap: 1rem;
       background: whitesmoke;
+    }
+    .nav a {
+      text-transform: capitalize;
     }
     h1 {
       font-size: 4rem;
