@@ -5,7 +5,6 @@ interface Props {
   title: string;
 }
 
-// server side only
 const { title } = Astro.props;
 
 const navCategoriesCollection = await getCollection("navCategories");
